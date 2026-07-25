@@ -1,0 +1,45 @@
+<!-- ===== HEADER / NAVBAR ===== -->
+<header class="site-header" role="banner">
+  <div class="header-inner container">
+    <a class="logo" href="#" aria-label="Luminary home">
+      <span class="logo-icon" aria-hidden="true">◈</span>
+      <span class="logo-text">Luminary</span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <ul class="nav-list" role="list">
+        <li><a href="#hero"     class="nav-link" aria-current="page">Home</a></li>
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#insights" class="nav-link">Insights</a></li>
+        <li><a href="#contact"  class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <!-- Dark Mode Toggle -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false">
+        <span class="theme-icon theme-icon--light" aria-hidden="true">☀️</span>
+        <span class="theme-icon theme-icon--dark"  aria-hidden="true">🌙</span>
+      </button>
+
+      <!-- Hamburger (mobile only) -->
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav Drawer -->
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true">
+  <ul class="mobile-nav-list" role="list">
+    <li><a href="#hero"     class="mobile-nav-link" aria-current="page">Home</a></li>
+    <li><a href="#features" class="mobile-nav-link">Features</a></li>
+    <li><a href="#insights" class="mobile-nav-link">Insights</a></li>
+    <li><a href="#contact"  class="mobile-nav-link">Contact</a></li>
+  </ul>
+</nav>
+<div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>

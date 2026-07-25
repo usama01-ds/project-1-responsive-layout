@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Project 1 — A premium responsive web experience built with modern HTML5, CSS3 and JavaScript." />
+  <title>Luminary — Project 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Skip to main content for accessibility -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ===== NAVBAR (loaded from components/navbar.html) ===== -->
+  <div id="navbar-slot"></div>
+
+  <!-- ===== MAIN ===== -->
+  <main id="main-content" tabindex="-1">
+
+    <!-- HERO (loaded from components/hero.html) -->
+    <div id="hero-slot"></div>
+
+    <!-- FEATURES + SIDEBAR (loaded from components/features.html) -->
+    <div id="features-slot"></div>
+
+  </main>
+
+  <!-- ===== FOOTER (loaded from components/footer.html) ===== -->
+  <div id="footer-slot"></div>
+
+  <script src="script.js" defer></script>
+
+  <!-- Component Loader — fetches each HTML partial and injects it into its slot -->
+  <script>
+    /**
+     * Loads an HTML partial file and injects it into the target slot element.
+     * @param {string} file   - Path to the HTML partial (relative to index.html)
+     * @param {string} slotId - ID of the placeholder <div> to replace
+     * @returns {Promise<void>}
+     */
+    async function loadComponent(file, slotId) {
+      const slot = document.getElementById(slotId);
+      if (!slot) return;
+      try {
+        const res = await fetch(file);
+        if (!res.ok) throw new Error(`Failed to load ${file}: ${res.status}`);
+        const html = await res.text();
+        slot.outerHTML = html;
+      } catch (err) {
+        console.error(`[Component Loader] ${err.message}`);
+      }
+    }
+
+    /**
+     * Load all components in order, then initialise the page scripts.
+     * Components are loaded in parallel for speed; initPage() runs after all resolve.
+     */
+    (async function bootstrap() {
+      await Promise.all([
+        loadComponent('components/navbar.html',   'navbar-slot'),
+        loadComponent('components/hero.html',     'hero-slot'),
+        loadComponent('components/features.html', 'features-slot'),
+        loadComponent('components/footer.html',   'footer-slot'),
+      ]);
+
+      // Re-dispatch DOMContentLoaded equivalent so script.js can re-initialise
+      // interactive elements that were injected after the original page load.
+      document.dispatchEvent(new Event('componentsLoaded'));
+    })();
+  </script>
+
+</body>
+</html>
